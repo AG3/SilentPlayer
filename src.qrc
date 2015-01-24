@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file>SPmain.qml</file>
+        <file>SPmusicElement.qml</file>
+        <file>SPsettings.qml</file>
+    </qresource>
+</RCC>
