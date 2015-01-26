@@ -5,21 +5,39 @@ SPplayer::SPplayer(QObject *parent) :
 {
     connect(&player,SIGNAL(durationChanged(qint64)),this,SLOT(totalTime(qint64)));
     connect(&player,SIGNAL(positionChanged(qint64)),this,SLOT(positionChanged(qint64)));
+    connect(&player,SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)),this,SLOT(autoNext(QMediaPlayer::MediaStatus)));
     totalDuration=0;
 }
 
 
-void SPplayer::playMusic(int index, int vol)
+void SPplayer::playMusic(int index, int vol=-1)
 {
-    if(player.media()==QMediaContent(playList.getUrlbyIndex(index)))
+    if(vol==-1)
     {
-        player.stop();
+        vol=player.volume();
     }
-    player.setMedia(QUrl::fromLocalFile(playList.getUrlbyIndex(index)));
-    player.setVolume(vol);
-    player.play();
-
-    qDebug()<<"played";
+    if(index==-1)
+    {
+        index=curInd;
+    }
+    if(curInd==index && player.state()==QMediaPlayer::PlayingState)
+    {
+        player.pause();
+        qDebug()<<"pause";
+    }
+    else if(curInd==index  && player.state()==QMediaPlayer::PausedState)
+    {
+        player.play();
+        qDebug()<<"continue";
+    }
+    else
+    {
+        player.setMedia(QUrl::fromLocalFile(playList.getUrlbyIndex(index)));
+        player.setVolume(vol);
+        player.play();
+        curInd=index;
+        qDebug()<<"played";
+    }
 }
 
 void SPplayer::setMusicDir(QString url)
@@ -36,7 +54,6 @@ void SPplayer::findMusic()
     {
         playList.addSPmusic(SPmusicInfo(t[i],dir.absolutePath()+"/"+t[i],i,0));
     }
-    qDebug()<<t.size();
 }
 
 void SPplayer::changeVolume(int v)
@@ -52,7 +69,7 @@ void SPplayer::totalTime(qint64 n)
 void SPplayer::positionChanged(qint64 n)
 {
     nowDuration=(n*1.0)/(totalDuration*1.0)*100;
-    qDebug()<<n<<totalDuration<<nowDuration;
+    //qDebug()<<n<<totalDuration<<nowDuration;
     cont->setProperty("value",QVariant(nowDuration));
 }
 
@@ -64,4 +81,40 @@ int SPplayer::getPosition()
 void SPplayer::setBar(QObject *t)
 {
     cont=t;
+}
+
+void SPplayer::nextMusic()
+{
+    player.stop();
+    if(curInd+1<playList.size())
+    {
+        curInd++;
+    }
+    else
+    {
+        curInd=0;
+    }
+    playMusic(curInd);
+}
+
+void SPplayer::perMusic()
+{
+    player.stop();
+    if(curInd-1>=0)
+    {
+        curInd--;
+    }
+    else
+    {
+        curInd=playList.size()-1;
+    }
+    playMusic(curInd);
+}
+
+void SPplayer::autoNext(QMediaPlayer::MediaStatus s)
+{
+    if(s==QMediaPlayer::EndOfMedia)
+    {
+        nextMusic();
+    }
 }

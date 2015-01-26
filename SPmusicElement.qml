@@ -4,7 +4,6 @@ Rectangle {
     id:musicElement
     color: "lightgray"
     border.color: "gray"
-    //anchors.fill: parent
     width:parent.width
     height:80
     Text{
@@ -14,15 +13,19 @@ Rectangle {
         font.pointSize: 15
     }
     MouseArea{
+        hoverEnabled: true
         anchors.fill: parent
         onClicked: {
-            console.log(parent.color)
             player.playMusic(playIndex,vol.value)
-            if(parent.color=="#ffff00"){
-                parent.color="lightgray"
-            }else{
-                parent.color="yellow"
-            }
+        }
+        onPressed: {
+            musicElement.color="gray"
+        }
+        onReleased: {
+            musicElement.color="lightgray"
+        }
+        onExited: {
+            musicElement.color="lightgray"
         }
     }
 }

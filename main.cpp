@@ -23,13 +23,7 @@ int main(int argc, char *argv[])
     QObject *obj=view->rootObject();
     QObject *bar = obj->findChild<QObject*>("progressBar");
     player.setBar(bar);
-
+    view->setResizeMode(QQuickView::SizeRootObjectToView);
     view->showFullScreen();
-    bar->setProperty("value",QVariant(59));
-
-
-    //QQuickItem *t=importer->findChild<QQuickItem *>("progressBar");
-    //qDebug()<<t->isEnabled();
-    //t->setProperty("value",QVariant(50));
     return a.exec();
 }

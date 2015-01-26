@@ -75,3 +75,8 @@ QString SPmusicItem::getUrlbyIndex(int d)
 {
     return musicInfoList.at(d).getUrl();
 }
+
+int SPmusicItem::size()
+{
+    return musicInfoList.size();
+}

@@ -23,7 +23,7 @@ public:
 private:
     QString musicDir;
     void findMusic();
-
+    int curInd;
     QMediaPlayer player;
     bool flag;
     double nowDuration;
@@ -32,6 +32,9 @@ signals:
     void changeTime();
 
 public slots:
+    void nextMusic();
+    void autoNext(QMediaPlayer::MediaStatus s);
+    void perMusic();
     int getPosition();
     void positionChanged(qint64);
     void totalTime(qint64);

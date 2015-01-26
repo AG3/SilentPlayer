@@ -32,7 +32,7 @@ public:
             RankRole,
             UrlRole
         };
-
+    int size();
         void addSPmusic(const SPmusicInfo &aInfo);
         int rowCount(const QModelIndex & parent = QModelIndex()) const;
         QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
