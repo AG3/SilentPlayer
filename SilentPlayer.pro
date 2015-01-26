@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui quick qml multimedia
+QT       += quick multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,3 +22,8 @@ HEADERS  += \
 
 RESOURCES += \
     src.qrc
+
+OTHER_FILES += \
+    android/AndroidManifest.xml
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+CONFIG += mobility

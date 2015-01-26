@@ -2,8 +2,8 @@ import QtQuick 2.0
 
 Rectangle {
     id:musicElement
-    color: "red"
-    border.color: "lightgray"
+    color: "lightgray"
+    border.color: "gray"
     //anchors.fill: parent
     width:parent.width
     height:80
@@ -16,8 +16,13 @@ Rectangle {
     MouseArea{
         anchors.fill: parent
         onClicked: {
-            console.log(vol.value)
-            player.playMusic(fileUrl,vol.value)
+            console.log(parent.color)
+            player.playMusic(playIndex,vol.value)
+            if(parent.color=="#ffff00"){
+                parent.color="lightgray"
+            }else{
+                parent.color="yellow"
+            }
         }
     }
 }

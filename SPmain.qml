@@ -1,25 +1,30 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.2
+import QtQuick.Controls.Styles 1.1
 import "qrc:/qml"
 
-Rectangle {
-    width:700
-    height:900
+Item {
+    height:800
+    width:720
+
     ListView{
         width:parent.width
-        height:parent.height/9*7
+        height:parent.height-parent.height/9-parent.height/80
 
         model:playList
-
         delegate: SPmusicElement{}
     }
 
-    Slider{
+    ProgressBar{
+        objectName: "progressBar"
         id:playProgress
-        height:parent.height/9
+        height:parent.height/80
         width:parent.width
-        y:parent.height/9*7
+        anchors.bottom: vol.top
+        maximumValue: 100
+        value:0
     }
+
     Slider{
         id:vol
         height:parent.height/9
@@ -29,7 +34,7 @@ Rectangle {
         minimumValue: 0
         stepSize: 1
         onValueChanged: {
-            player.changeVolume(vol.value)
+            player.changeVolume(value)
         }
     }
 

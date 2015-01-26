@@ -70,3 +70,8 @@ QHash<int, QByteArray> SPmusicItem::roleNames() const {
     roles[NameRole]="musicName";
     return roles;
 }
+
+QString SPmusicItem::getUrlbyIndex(int d)
+{
+    return musicInfoList.at(d).getUrl();
+}

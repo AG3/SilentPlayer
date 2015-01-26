@@ -14,6 +14,7 @@ public:
     int getIndex() const;
     int getDuration() const;
 
+
 private:
     QString musicName,fileUrl;
     int playIndex,musicDuration;
@@ -24,7 +25,7 @@ class SPmusicItem : public QAbstractListModel
     Q_OBJECT
 public:
     explicit SPmusicItem();
-
+    QString getUrlbyIndex(int d);
     enum SPmusicItemRoles {
             DurationRole = Qt::UserRole + 1,
             NameRole,

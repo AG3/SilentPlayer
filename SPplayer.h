@@ -6,6 +6,7 @@
 #include"QMediaPlayer"
 #include"QMediaContent"
 #include"QMediaPlaylist"
+#include"QQmlContext"
 #include"QFile"
 #include"QDir"
 
@@ -14,19 +15,30 @@ class SPplayer : public QObject
     Q_OBJECT
 public:
     explicit SPplayer(QObject *parent = 0);
-
-signals:
+    SPmusicItem playList;
+    qint64 totalDuration;
+    QObject *cont;
+    void setBar(QObject *t);
 
 private:
     QString musicDir;
     void findMusic();
-    SPmusicItem playList;
+
     QMediaPlayer player;
+    bool flag;
+    double nowDuration;
+
+signals:
+    void changeTime();
 
 public slots:
+    int getPosition();
+    void positionChanged(qint64);
+    void totalTime(qint64);
     void setMusicDir(QString url);
-    void playMusic(QString url,int vol);
+    void playMusic(int index,int vol);
     void changeVolume(int v);
 };
+
 
 #endif // SPPLAYER_H
