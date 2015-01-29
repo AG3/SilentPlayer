@@ -14,11 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     SPplayer.cpp \
-    SPmusicItem.cpp
+    SPmusicItem.cpp \
+    SPurlSelector.cpp
 
 HEADERS  += \
     SPplayer.h \
-    SPmusicItem.h
+    SPmusicItem.h \
+    SPurlSelector.h
 
 RESOURCES += \
     src.qrc

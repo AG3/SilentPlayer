@@ -39,8 +39,7 @@ Item {
     }
     Rectangle{
         height:parent.height/9
-        anchors.left: forward.right
-        width:parent.width-(parent.height/9)*4
+        width:parent.width-parent.height/9
         y:parent.height/9*8
         color:"white"
         z:0
@@ -51,12 +50,23 @@ Item {
         height:parent.height/9
         width:parent.height/9
         anchors.bottom: parent.bottom
-        color:"pink"
         MouseArea{
             anchors.fill: parent
             onClicked: {
                 player.perMusic()
             }
+            onPressed: {
+                parent.opacity=0.6
+            }
+            onReleased: {
+                parent.opacity=1
+            }
+        }
+        Image {
+            anchors.centerIn: parent
+            width: parent.width*0.8
+            height:parent.height*0.8
+            source: "qrc:/icon/rewind.png"
         }
     }
     Rectangle{
@@ -65,12 +75,28 @@ Item {
         width:parent.height/9
         anchors.left:back.right
         anchors.bottom: parent.bottom
-        color:"green"
         MouseArea{
             anchors.fill: parent
             onClicked: {
                 player.playMusic(-1,vol.value)
+                if(img.source=="qrc:/icon/play.png")
+                    img.source="qrc:/icon/pause.png"
+                else
+                    img.source="qrc:/icon/play.png"
             }
+            onPressed: {
+                parent.opacity=0.6
+            }
+            onReleased: {
+                parent.opacity=1
+            }
+        }
+        Image {
+            id:img
+            anchors.centerIn: parent
+            width: parent.width*0.8
+            height:parent.height*0.8
+            source: "qrc:/icon/play.png"
         }
     }
     Rectangle{
@@ -79,12 +105,23 @@ Item {
         width:parent.height/9
         anchors.left: playpause.right
         anchors.bottom: parent.bottom
-        color:"pink"
         MouseArea{
             anchors.fill: parent
             onClicked: {
                 player.nextMusic()
             }
+            onPressed: {
+                parent.opacity=0.6
+            }
+            onReleased: {
+                parent.opacity=1
+            }
+        }
+        Image {
+            anchors.centerIn: parent
+            width: parent.width*0.8
+            height:parent.height*0.8
+            source: "qrc:/icon/forward.png"
         }
     }
 
@@ -92,8 +129,8 @@ Item {
         id:settings
         visible: false
         anchors.centerIn: parent
-        width: parent.width/2
-        height: parent.height/2
+        width: parent.width/4*3
+        height: parent.height/4*3
     }
 
     Rectangle{
@@ -101,12 +138,23 @@ Item {
         width:parent.height/9
         y:parent.height/9*8
         x:parent.width-parent.height/9
-        color:"blue"
         MouseArea{
             anchors.fill: parent
             onClicked: {
                 settings.visible=!settings.visible
             }
+            onPressed: {
+                parent.opacity=0.6
+            }
+            onReleased: {
+                parent.opacity=1
+            }
+        }
+        Image {
+            anchors.centerIn: parent
+            width: parent.width*0.8
+            height:parent.height*0.8
+            source: "qrc:/icon/settings.png"
         }
     }
 }

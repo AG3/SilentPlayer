@@ -9,6 +9,7 @@
 #include"QQmlContext"
 #include"QFile"
 #include"QDir"
+#include"QFileDialog"
 
 class SPplayer : public QObject
 {

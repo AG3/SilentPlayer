@@ -5,6 +5,8 @@
 #include <QHash>
 #include <QList>
 
+#include"QDebug"
+
 class SPmusicInfo
 {
 public:
@@ -33,9 +35,11 @@ public:
             UrlRole
         };
     int size();
-        void addSPmusic(const SPmusicInfo &aInfo);
-        int rowCount(const QModelIndex & parent = QModelIndex()) const;
-        QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
+    void addSPmusic(const SPmusicInfo &aInfo);
+    int rowCount(const QModelIndex & parent = QModelIndex()) const;
+    QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
+    void clear();
+
 protected:
     QHash<int, QByteArray> roleNames() const;
 private:

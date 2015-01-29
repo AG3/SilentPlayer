@@ -3,5 +3,13 @@
         <file>SPmain.qml</file>
         <file>SPmusicElement.qml</file>
         <file>SPsettings.qml</file>
+        <file>SPchoosePath.qml</file>
+    </qresource>
+    <qresource prefix="/icon">
+        <file>forward.png</file>
+        <file>play.png</file>
+        <file>rewind.png</file>
+        <file>settings.png</file>
+        <file>pause.png</file>
     </qresource>
 </RCC>

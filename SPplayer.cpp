@@ -12,6 +12,8 @@ SPplayer::SPplayer(QObject *parent) :
 
 void SPplayer::playMusic(int index, int vol=-1)
 {
+    if(playList.size()>0)
+    {
     if(vol==-1)
     {
         vol=player.volume();
@@ -38,6 +40,7 @@ void SPplayer::playMusic(int index, int vol=-1)
         curInd=index;
         qDebug()<<"played";
     }
+    }
 }
 
 void SPplayer::setMusicDir(QString url)
@@ -48,6 +51,7 @@ void SPplayer::setMusicDir(QString url)
 
 void SPplayer::findMusic()
 {
+    playList.clear();
     QDir dir(musicDir);
     QStringList t=dir.entryList(QDir::Files);
     for(int i=0;i<t.size();i++)
@@ -69,7 +73,6 @@ void SPplayer::totalTime(qint64 n)
 void SPplayer::positionChanged(qint64 n)
 {
     nowDuration=(n*1.0)/(totalDuration*1.0)*100;
-    //qDebug()<<n<<totalDuration<<nowDuration;
     cont->setProperty("value",QVariant(nowDuration));
 }
 

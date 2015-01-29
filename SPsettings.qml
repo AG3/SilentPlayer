@@ -1,46 +1,27 @@
 import QtQuick 2.0
+import "qrc:/qml"
 
 Rectangle {
     color:"lightblue"
-    /*Rectangle{
-        z:1
-        width:parent.width/3*2
-        height:parent.width/10
-        anchors.centerIn: parent
-        color:"lightgray"
-        MouseArea{
-            z:2
-            anchors.fill: parent
-        }
-    }*/
-
     Text{
-        anchors.horizontalCenter: ipt.horizontalCenter
-        anchors.bottom: ipt.top
+        anchors.horizontalCenter: spcp.horizontalCenter
+        anchors.bottom: spcp.top
         anchors.bottomMargin: 50
-        text:"请填写音乐目录，单击本窗口为确定"
+        text:"填写音乐目录，单击本窗口取消"
     }
 
-    TextInput{
-        z:3
-        id:ipt
-        readOnly: false
-        selectByMouse: true
-        width:parent.width/3*2
-        height:parent.width/10
-        font.pointSize: 15
+    SPchoosePath{
+        id:spcp
+        z:1
         anchors.centerIn: parent
-        text:"D:/Music"
-        font.family: "微软雅黑"
-        horizontalAlignment: Text.AlignHCenter
+        width:parent.width/4*3
+        height:parent.height/4*3
     }
-
 
     MouseArea{
         z:0
         anchors.fill: parent
         onClicked: {
-            player.setMusicDir(ipt.text)
             settings.visible=false
         }
     }

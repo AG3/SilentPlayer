@@ -80,3 +80,10 @@ int SPmusicItem::size()
 {
     return musicInfoList.size();
 }
+
+void SPmusicItem::clear()
+{
+    qDebug()<<musicInfoList.count();
+    musicInfoList.clear();
+    qDebug()<<musicInfoList.count();
+}
